@@ -4,6 +4,7 @@
   --bg: #0a0e1a;
   --panel: #05070d;
   --panel-alt: #10131f;
+  --panel-alt2: #171a28;
   --border: #4a4a4a;
   --border-light: #7a7a7a;
   --text: #c7c7c7;
@@ -18,9 +19,13 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
-  padding: 1.5rem 0.75rem;
+  padding: 0 0 1.5rem;
   background-color: var(--bg);
   background-image: repeating-linear-gradient(
     45deg,
@@ -33,28 +38,33 @@ body {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 .page-wrap {
-  max-width: 760px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   background: var(--panel);
-  border: 1px solid var(--border-light);
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
 }
 
-/* ---- header ---- */
+/* ---- header (full-bleed banner, constrained inner row) ---- */
 
 .site-header {
-  padding: 0.75rem 1rem;
   background: linear-gradient(180deg, #5a5a5a 0%, #2b2b2b 55%, #1a1a1a 100%);
   border-bottom: 2px outset #777;
+}
+
+.site-header-inner {
+  padding: 0.6rem 1rem;
 }
 
 .site-title {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
-  font-size: 26px;
+  font-size: 28px;
   letter-spacing: 0.08em;
   color: var(--heading);
   text-shadow: 1px 1px 0 #000;
@@ -68,62 +78,44 @@ body {
 }
 
 .site-dates {
-  margin: 0.4rem 0 0;
+  margin: 0.35rem 0 0;
   font-family: "Courier New", Courier, monospace;
   font-size: 10px;
   color: #9fd8ff;
 }
 
-/* ---- layout: nav + main ---- */
-
-.body-grid {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-}
-
-@media (width <= 640px) {
-  .body-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .site-nav {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
+/* ---- horizontal text navigation ---- */
 
 .site-nav {
-  padding: 0.75rem 0.5rem;
   background: var(--panel-alt);
-  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.4rem 1rem;
 }
 
 .site-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0;
+  font-size: 12px;
 }
 
-.site-nav li + li {
-  margin-top: 0.35rem;
+.site-nav li {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav li + li::before {
+  content: "|";
+  color: var(--border-light);
+  margin: 0 0.55rem;
 }
 
 .site-nav a {
-  display: block;
-  padding: 0.2rem 0.3rem 0.2rem 1.1rem;
-  position: relative;
   text-decoration: none;
-}
-
-.site-nav a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.35rem;
-  width: 8px;
-  height: 8px;
-  background: var(--heading);
-  border: 1px solid #000;
+  padding: 0.1rem 0.05rem;
 }
 
 .site-nav a[aria-current="page"] {
@@ -131,26 +123,30 @@ body {
   font-weight: bold;
 }
 
-.site-nav a[aria-current="page"]::before {
-  background: var(--warn);
-}
+/* ---- main content ---- */
 
 .site-main {
-  padding: 0.9rem 1.1rem;
+  padding: 0.9rem 1rem 1.2rem;
   min-width: 0;
 }
 
-.site-main h1 {
+.detail-title {
   color: var(--heading);
-  font-size: 19px;
+  font-size: 20px;
   border-bottom: 1px dotted var(--border-light);
   padding-bottom: 0.3rem;
+  margin-top: 0;
 }
 
 .site-main h2 {
   color: var(--heading);
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 1.6rem;
+}
+
+.site-main h3 {
+  color: var(--heading);
+  font-size: 13px;
 }
 
 /* ---- links ---- */
@@ -305,42 +301,205 @@ table.catalogue tr:nth-child(even) td {
   background: #0d0f18;
 }
 
-/* ---- album entries ---- */
+/* ---- decade jump / back to top ---- */
 
-.record {
+.decade-jump {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  border: 1px solid var(--border);
+  background: var(--panel-alt);
+  padding: 0.5rem 0.7rem;
+  margin: 0.75rem 0;
+}
+
+.decade-jump span {
+  color: #9fd8ff;
+  margin-right: 0.4rem;
+}
+
+.decade-jump a {
+  margin-right: 0.7rem;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.decade-heading {
+  scroll-margin-top: 0.5rem;
+  color: var(--heading);
+  font-size: 15px;
+  margin: 1.6rem 0 0.5rem;
+  padding: 0.3rem 0.5rem;
+  background: var(--panel-alt2);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--heading);
+}
+
+.back-to-top {
+  display: inline-block;
+  font-size: 10px;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0.5rem 0 1rem;
+}
+
+/* ---- catalogue grid ---- */
+
+.catalogue-grid {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.6rem;
-  margin: 0.9rem 0;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px dotted var(--border);
+  margin: 0.5rem 0;
 }
 
-.record:last-child {
-  border-bottom: none;
+@media (width <= 899px) {
+  .catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.record img {
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--border-light);
-  image-rendering: pixelated;
+@media (width <= 639px) {
+  .catalogue-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.record h3 {
+.rec-card {
+  display: flex;
+  gap: 0.55rem;
+  border: 1px solid var(--border);
+  background: var(--panel-alt);
+  padding: 0.5rem;
+  min-width: 0;
+}
+
+.rec-card:hover {
+  border-color: var(--heading);
+  background: var(--panel-alt2);
+}
+
+.cover-placeholder {
+  border: 1px dashed var(--border-light);
+  background: #000;
+  color: #7a8a7a;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.3;
+  padding: 4px;
+}
+
+.rec-card .cover-placeholder {
+  flex: 0 0 auto;
+  width: 110px;
+  height: 110px;
+  font-size: 9px;
+}
+
+@media (width <= 639px) {
+  .rec-card .cover-placeholder {
+    width: 84px;
+    height: 84px;
+    font-size: 8px;
+  }
+}
+
+.rec-card .rec-body {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.rec-card h3 {
   margin: 0 0 0.2rem;
   font-size: 12px;
   color: #fff;
 }
 
-.record .rec-meta {
+.rec-card .rec-meta {
   font-size: 10px;
   color: #9fd8ff;
   font-family: "Courier New", Courier, monospace;
+  margin: 0 0 0.3rem;
 }
 
-.record p {
-  margin: 0.3rem 0 0;
+.rec-card .rec-note {
+  margin: 0.2rem 0;
+}
+
+.rec-card .rec-link {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ---- album detail page ---- */
+
+.detail-heading {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  color: #9fd8ff;
+  margin: 0 0 0.4rem;
+}
+
+.detail-main {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.detail-cover {
+  flex: 0 0 auto;
+}
+
+.detail-cover .cover-placeholder {
+  width: 160px;
+  height: 160px;
+  font-size: 10px;
+}
+
+.detail-facts {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.detail-facts table.catalogue {
+  min-width: 0;
+}
+
+.detail-review {
+  margin-top: 1rem;
+}
+
+.ownership-note {
+  border-left: 3px solid var(--heading);
+  padding-left: 0.6rem;
+  margin: 0.9rem 0;
+  font-style: italic;
+}
+
+.record-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-alt);
+  padding: 0.5rem 0.7rem;
+  margin: 1.2rem 0 0.5rem;
+  font-size: 11px;
+}
+
+.record-nav .rn-prev,
+.record-nav .rn-next {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.record-nav .rn-next {
+  text-align: right;
+}
+
+.record-nav .rn-index {
+  text-align: center;
 }
 
 /* ---- footer ---- */
