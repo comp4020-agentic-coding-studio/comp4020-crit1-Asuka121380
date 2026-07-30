@@ -1,23 +1,114 @@
 <!doctype html>
-<html lang="en-AU">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>COMP4020 prototype</title>
+    <title>The Record Cabinet — A Personal Music Archive</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header>
-      <nav aria-label="Primary">
-        <a href="./">Home</a>
-      </nav>
-    </header>
-    <main>
-      <h1>COMP4020 prototype</h1>
-      <p data-testid="intro">
-        Replace this with your prototype. This week's brief is on the course website;
-        <code>spec/README.md</code> explains how the checks in this repo relate to it.
-      </p>
-    </main>
+    <div class="page-wrap">
+      <header class="site-header">
+        <h1 class="site-title">THE RECORD CABINET</h1>
+        <p class="site-tagline">A PERSONAL MUSIC ARCHIVE</p>
+        <p class="site-dates">ONLINE SINCE: 14 MARCH 1998 &nbsp;|&nbsp; LAST UPDATED: 03 AUGUST 2003</p>
+      </header>
+
+      <div class="body-grid">
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="./" aria-current="page">Home</a></li>
+            <li><a href="./collection.html">Collection</a></li>
+            <li><a href="./rock.html">Rock</a></li>
+            <li><a href="./experimental.html">Experimental</a></li>
+            <li><a href="./japan.html">Japan</a></li>
+            <li><a href="./electronic.html">Electronic</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./links.html">Links</a></li>
+            <li><a href="./guestbook.html">Guestbook</a></li>
+          </ul>
+        </nav>
+
+        <main class="site-main">
+          <h2>Welcome</h2>
+          <p>
+            Welcome to my record page. These are the records currently occupying my
+            bedroom. Nothing here is for sale.
+          </p>
+          <p>
+            Feel free to sign my <a href="./guestbook.html">guestbook</a> or drop me a
+            line. This page has not been redesigned since 1998.
+          </p>
+
+          <div class="currently-playing panel-box">
+            <span class="cp-label">NOW PLAYING&gt;</span> CASIOPEA &mdash; &ldquo;Domino
+            Line&rdquo; (Mint Jams, 1982)
+          </div>
+
+          <h2>Latest Additions <span class="new-flag">NEW!</span></h2>
+          <ul>
+            <li>Red Hot Chili Peppers &mdash; <a href="./rock.html#rhcp">By the Way</a></li>
+            <li>A separate section for <a href="./japan.html">Japanese records</a></li>
+          </ul>
+
+          <h2>Collection Statistics</h2>
+          <div class="table-wrap">
+            <table class="catalogue">
+              <caption>Holdings by format</caption>
+              <thead>
+                <tr><th scope="col">Format</th><th scope="col">Count</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Vinyl</td><td>4</td></tr>
+                <tr><td>Cassette</td><td>3</td></tr>
+                <tr><td>CD</td><td>8</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Total records catalogued: 15. Visitors since the counter was fixed in 1999:
+          </p>
+          <p class="visitor-counter" aria-label="Visitor counter reading 008417">
+            <span>0</span><span>0</span><span>8</span><span>4</span><span>1</span><span>7</span>
+          </p>
+
+          <h2>Update Log</h2>
+          <div class="update-log">03 AUG 2003
+Added Red Hot Chili Peppers &mdash; By the Way.
+Fixed several missing images on the Japan page.
+The guestbook is working again.
+
+17 NOV 2001
+Added a separate section for Japanese records.
+My CASIOPEA CD finally arrived.
+
+22 MAY 1999
+The collection now contains 100 records.
+Thank you to visitor number 5,000.</div>
+
+          <div class="badge-row">
+            <span class="badge">UNDER CONSTRUCTION</span>
+            <span class="badge">MADE WITH NOTEPAD</span>
+            <span class="badge">BEST VIEWED AT 800&times;600</span>
+          </div>
+
+          <div class="webring">
+            THE ALTERNATIVE MUSIC WEBRING
+            <div class="webring-links">
+              <span>&laquo; Prev</span>
+              <span>Random</span>
+              <span>Next &raquo;</span>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <footer class="site-footer">
+        <p>THIS SITE WAS CREATED BY HAND</p>
+        <p>BEST VIEWED AT 800 &times; 600</p>
+        <p>NETSCAPE 4.7 / INTERNET EXPLORER 5</p>
+        <p>&copy; 1998&ndash;2003 THE RECORD CABINET</p>
+      </footer>
+    </div>
   </body>
 </html>

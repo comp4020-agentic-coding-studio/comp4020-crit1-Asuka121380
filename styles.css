@@ -1,16 +1,360 @@
+/* THE RECORD CABINET — styled as if untouched since 1998, last touched 2003 */
+
+:root {
+  --bg: #0a0e1a;
+  --panel: #05070d;
+  --panel-alt: #10131f;
+  --border: #4a4a4a;
+  --border-light: #7a7a7a;
+  --text: #c7c7c7;
+  --heading: #fc3;
+  --link: #3ff;
+  --link-visited: #c6f;
+  --warn: #f44;
+  --lcd-green: #3f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 2rem;
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
-  color: #1a1a1a;
+  padding: 1.5rem 0.75rem;
+  background-color: var(--bg);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(255 255 255 / 1.5%) 0,
+    rgb(255 255 255 / 1.5%) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  color: var(--text);
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
-main {
-  max-width: 40rem;
+.page-wrap {
+  max-width: 760px;
+  width: 100%;
   margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--border-light);
 }
 
-a {
-  color: #0b5fff;
+/* ---- header ---- */
+
+.site-header {
+  padding: 0.75rem 1rem;
+  background: linear-gradient(180deg, #5a5a5a 0%, #2b2b2b 55%, #1a1a1a 100%);
+  border-bottom: 2px outset #777;
+}
+
+.site-title {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  color: var(--heading);
+  text-shadow: 1px 1px 0 #000;
+}
+
+.site-tagline {
+  margin: 0.15rem 0 0;
+  font-size: 11px;
+  color: #ddd;
+  font-style: italic;
+}
+
+.site-dates {
+  margin: 0.4rem 0 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  color: #9fd8ff;
+}
+
+/* ---- layout: nav + main ---- */
+
+.body-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+@media (width <= 640px) {
+  .body-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-nav {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.site-nav {
+  padding: 0.75rem 0.5rem;
+  background: var(--panel-alt);
+  border-right: 1px solid var(--border);
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav li + li {
+  margin-top: 0.35rem;
+}
+
+.site-nav a {
+  display: block;
+  padding: 0.2rem 0.3rem 0.2rem 1.1rem;
+  position: relative;
+  text-decoration: none;
+}
+
+.site-nav a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 8px;
+  height: 8px;
+  background: var(--heading);
+  border: 1px solid #000;
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--heading);
+  font-weight: bold;
+}
+
+.site-nav a[aria-current="page"]::before {
+  background: var(--warn);
+}
+
+.site-main {
+  padding: 0.9rem 1.1rem;
+  min-width: 0;
+}
+
+.site-main h1 {
+  color: var(--heading);
+  font-size: 19px;
+  border-bottom: 1px dotted var(--border-light);
+  padding-bottom: 0.3rem;
+}
+
+.site-main h2 {
+  color: var(--heading);
+  font-size: 14px;
+  margin-top: 1.6rem;
+}
+
+/* ---- links ---- */
+
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px dashed var(--heading);
+  outline-offset: 2px;
+}
+
+hr {
+  border: none;
+  border-top: 1px dotted var(--border-light);
+  margin: 1rem 0;
+}
+
+/* ---- widgets ---- */
+
+.new-flag {
+  color: var(--warn);
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.panel-box {
+  border: 1px solid var(--border);
+  background: var(--panel-alt);
+  padding: 0.6rem 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.currently-playing {
+  font-family: "Courier New", Courier, monospace;
+  background: #000;
+  color: var(--lcd-green);
+  border: 2px inset #444;
+  padding: 0.5rem 0.7rem;
+  font-size: 11px;
+}
+
+.currently-playing .cp-label {
+  color: #7fff9f;
+  letter-spacing: 0.1em;
+}
+
+.visitor-counter {
+  font-family: "Courier New", Courier, monospace;
+  display: inline-flex;
+  gap: 2px;
+  background: #000;
+  border: 2px inset #555;
+  padding: 3px 5px;
+}
+
+.visitor-counter span {
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  color: var(--warn);
+  background: #1a0000;
+}
+
+.update-log {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  white-space: pre-wrap;
+  background: #000;
+  color: #ccc;
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.badge {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  border: 1px solid var(--border-light);
+  background: var(--panel-alt);
+  padding: 0.3rem 0.5rem;
+  color: #ddd;
+}
+
+.webring {
+  font-size: 11px;
+  text-align: center;
+  border: 1px solid var(--border);
+  padding: 0.4rem;
+  margin: 0.75rem 0;
+}
+
+.webring .webring-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* ---- tables ---- */
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  margin: 0.75rem 0;
+}
+
+table.catalogue {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 11px;
+  min-width: 480px;
+}
+
+table.catalogue caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--heading);
+  padding: 0.3rem 0.4rem;
+  background: var(--panel-alt);
+}
+
+table.catalogue th,
+table.catalogue td {
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.4rem;
+  text-align: left;
+}
+
+table.catalogue th {
+  background: #22252f;
+  color: var(--heading);
+}
+
+table.catalogue tr:nth-child(even) td {
+  background: #0d0f18;
+}
+
+/* ---- album entries ---- */
+
+.record {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0.6rem;
+  margin: 0.9rem 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dotted var(--border);
+}
+
+.record:last-child {
+  border-bottom: none;
+}
+
+.record img {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--border-light);
+  image-rendering: pixelated;
+}
+
+.record h3 {
+  margin: 0 0 0.2rem;
+  font-size: 12px;
+  color: #fff;
+}
+
+.record .rec-meta {
+  font-size: 10px;
+  color: #9fd8ff;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.record p {
+  margin: 0.3rem 0 0;
+}
+
+/* ---- footer ---- */
+
+.site-footer {
+  border-top: 2px outset #555;
+  background: var(--panel-alt);
+  padding: 0.75rem 1rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  text-align: center;
+  color: #9a9a9a;
+}
+
+.site-footer p {
+  margin: 0.2rem 0;
 }
