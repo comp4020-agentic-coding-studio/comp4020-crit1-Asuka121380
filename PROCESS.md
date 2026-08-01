@@ -13,7 +13,11 @@ collection across six genre pages (rock, electronic, experimental, Japan, plus
 a top-level "collection" index); partway through I decided that was the wrong
 shape for a shelf that grew over time rather than by genre, and rebuilt it as
 one unified catalogue on `index.html` with all 42 records grouped by decade,
-each linking out to its own detail page under `records/`.
+each linking out to its own detail page under `records/`. A later redesign pass
+cut that 42-record catalogue down to six properly-written-up entries, moved
+the top nav into a left sidebar, and rebuilt the homepage around a "MY RECORD
+COLLECTION" grid feeding straight into the footer's NOW PLAYING/visitor-counter
+widgets.
 
 ## The moments that mattered
 
@@ -71,6 +75,33 @@ each linking out to its own detail page under `records/`.
    [`b38fb87`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-Asuka121380/commit/b38fb87)
    --- after the fact, not before: that commit records lessons from the
    commits above, it didn't guide them.
+
+5. **Six records, verified at both viewports before the numbers were treated as
+   final.** The redesign brief gave starting-point dimensions and font sizes for
+   a sidebar layout, but I treated those as a first guess rather than a target:
+   after building the `.page-body` grid and `.site-nav` sidebar, I rendered
+   `index.html` and a record page at both 1920×1080 and 390×844 with
+   `agent-browser` before settling on final values, the same screenshot
+   discipline from moment 3 above. That's why `--sidebar-width` stayed narrow
+   enough to leave `.site-main` room on desktop while the
+   `@media (width <= 639px)` rule collapses the sidebar to a wrapped horizontal
+   list instead of a hamburger menu --- a real layout decision, not a guess from
+   reading CSS numbers, landed in
+   [`575d2c7`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-Asuka121380/commit/575d2c7).
+
+6. **Cutting 36 records without breaking rename history took two commits, not
+   one.** Renumbering the five kept records into the new 01-06 sequence used
+   `git mv`, but once I rewrote their content to match the new template, staging
+   that rewritten content directly over the moved paths dropped git's
+   similarity score below its rename-detection threshold --- `git status` showed
+   plain delete+add pairs instead of the clean renames the "preserve history"
+   instruction called for. I split the work instead:
+   [`c189fd7`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-Asuka121380/commit/c189fd7)
+   is the pure rename plus the unused-page deletions, with the old file content
+   untouched at its new path; the content rewrite landed only in
+   [`575d2c7`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-Asuka121380/commit/575d2c7)
+   on top of that. `git log --follow` on any renamed record still traces cleanly
+   back through both commits.
 
 ## Before you ship
 
