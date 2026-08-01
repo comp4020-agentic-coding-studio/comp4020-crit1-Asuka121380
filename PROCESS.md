@@ -59,6 +59,19 @@ each linking out to its own detail page under `records/`.
    Re-screenshotting both viewports afterwards, not just re-reading the CSS, is
    what confirmed the box was actually visible and centred.
 
+4. **The harness didn't grow while the build did.** I directed the initial
+   build and the genre-to-catalogue redesign through detailed one-off prompts
+   kept outside this repo, and `CLAUDE.md` stayed the starter boilerplate the
+   whole time --- untouched while the two bugs above were being found and
+   fixed. Reviewing the history afterwards is what surfaced four things worth
+   keeping as standing rules rather than one-off fixes: the single-`<h1>`
+   convention, base-selector styling for shared classes like
+   `.cover-placeholder`, the no-JavaScript constraint the brief requires, and
+   the site's 2003 fiction. Those went into `CLAUDE.md` in
+   [`b38fb87`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-Asuka121380/commit/b38fb87)
+   --- after the fact, not before: that commit records lessons from the
+   commits above, it didn't guide them.
+
 ## Before you ship
 
 `pnpm check:evidence` verifies your citations resolve to real commits, that the
