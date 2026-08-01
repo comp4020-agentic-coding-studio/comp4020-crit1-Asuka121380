@@ -36,6 +36,22 @@ and see `spec/README.md` for how the checks in this repo relate to it.
   be.
 - Commit when the checks pass. Never commit a red state.
 
+## Crit 1: brief-specific rules
+
+- **Plain HTML and CSS only --- no JavaScript, ever.** The starter scaffolds
+  TypeScript/Vite and would happily build a `.js` bundle, but that default
+  doesn't apply to this deliverable: the deployed site ships no `<script>`
+  tags, no application TypeScript, no JS framework, and no generated `.js`
+  file anywhere in `dist/`. `main.ts` and its script tag were removed for
+  exactly this reason --- don't reintroduce either one, even to fix something
+  a script would make easier.
+- **THE RECORD CABINET is a fictional personal music archive, frozen at
+  2003.** The voice, the content and the look all commit to that: nothing on
+  the site should read as though it's been touched since. Don't modernise the
+  forgotten-web aesthetic --- no contemporary layout conventions, no modern
+  styling bleeding in "for polish". The dated look is the brief, not a gap to
+  fix.
+
 ## The checks (your sensors)
 
 CI runs these on every push once your repo is public. GitHub's checks UI shows
@@ -156,3 +172,27 @@ catching you out, a fact about the stack the agent keeps getting wrong --- write
 it down here. Growing this file is the work of harness engineering, and the gap
 between this boilerplate and your own version is part of what your prototype
 says about the developer you're becoming.
+
+## Conventions this build learned
+
+- **`.site-title` is the only `<h1>` on record pages; album titles stay `<h2
+  class="detail-title">`.** The invariants suite fails a page with more than
+  one top-level heading, and giving every one of the 42 detail pages its own
+  `<h1>` for the album title tripped it across the board at once.
+  `.detail-title` carries its visual weight in `styles.css`. Any new page
+  under `records/` follows this: `<h1 class="site-title">` must be the page's
+  only `<h1>`. The album name remains `<h2 class="detail-title">`, and other
+  section headings may use `<h2>` as needed.
+- **A shared placeholder class needs its visible styling at the base
+  selector, not only under the context that happened to need it first.**
+  `.cover-placeholder`'s border, background and centring were originally
+  written only under `.rec-card .cover-placeholder` (the catalogue-grid
+  card). Reusing the bare class on detail pages picked up a sized box with
+  none of that styling --- invisible, uncentred, easy to miss at desktop width
+  and obvious once the layout stacked to one column on mobile. The base
+  `.cover-placeholder` selector now owns the visible styling; per-context
+  selectors (`.rec-card .cover-placeholder`, `.detail-cover
+  .cover-placeholder`) only override sizing. When a class is meant to render
+  the same way in more than one place, put what makes it *visible* on the
+  base selector and leave contexts to override *size/position* only ---
+  and check that by screenshotting each context, not by re-reading the CSS.
