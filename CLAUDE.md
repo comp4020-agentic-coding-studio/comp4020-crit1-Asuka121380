@@ -46,11 +46,21 @@ and see `spec/README.md` for how the checks in this repo relate to it.
   exactly this reason --- don't reintroduce either one, even to fix something
   a script would make easier.
 - **THE RECORD CABINET is a fictional personal music archive, frozen at
-  2003.** The voice, the content and the look all commit to that: nothing on
-  the site should read as though it's been touched since. Don't modernise the
-  forgotten-web aesthetic --- no contemporary layout conventions, no modern
-  styling bleeding in "for polish". The dated look is the brief, not a gap to
-  fix.
+  3 August 2003.** The narrator's voice, the collection's dates and the
+  content all commit to that: nothing on the site should read as though it's
+  been touched since. Don't modernise the forgotten-web aesthetic --- no
+  contemporary layout conventions, no modern styling bleeding in "for
+  polish". The dated look is the brief, not a gap to fix.
+  The one narrow exception is real-world metadata that couldn't honestly
+  exist inside the fiction: the artwork-credit lines (the footer credit line,
+  each detail page's cover figcaption) name real rights holders and link the
+  real MusicBrainz release, because the site is redistributing real cover
+  art and that requires real attribution --- present-day publication,
+  accessibility and licensing facts are allowed to sit outside the
+  narrator's voice for exactly that reason. That exception is scoped to
+  those disclosures; it isn't licence to modernise the collector's
+  narration, the collection's dates, or the site's visual language. Anything
+  that isn't a credit/licensing/accessibility fact stays in character.
 
 ## The checks (your sensors)
 
@@ -183,16 +193,23 @@ says about the developer you're becoming.
   under `records/` follows this: `<h1 class="site-title">` must be the page's
   only `<h1>`. The album name remains `<h2 class="detail-title">`, and other
   section headings may use `<h2>` as needed.
-- **A shared placeholder class needs its visible styling at the base
-  selector, not only under the context that happened to need it first.**
-  `.cover-placeholder`'s border, background and centring were originally
-  written only under `.rec-card .cover-placeholder` (the catalogue-grid
-  card). Reusing the bare class on detail pages picked up a sized box with
-  none of that styling --- invisible, uncentred, easy to miss at desktop width
-  and obvious once the layout stacked to one column on mobile. The base
-  `.cover-placeholder` selector now owns the visible styling; per-context
-  selectors (`.rec-card .cover-placeholder`, `.detail-cover
-  .cover-placeholder`) only override sizing. When a class is meant to render
-  the same way in more than one place, put what makes it *visible* on the
-  base selector and leave contexts to override *size/position* only ---
+- **A shared class needs its visible styling at the base selector, not only
+  under the context that happened to need it first.** This was learned the
+  hard way from an earlier `.cover-placeholder` class whose border,
+  background and centring were written only under `.rec-card
+  .cover-placeholder` (the catalogue-grid card); reusing the bare class on
+  detail pages picked up a sized box with none of that styling --- invisible,
+  uncentred, easy to miss at desktop width and obvious once the layout
+  stacked to one column on mobile. `.cover-placeholder` is gone from the
+  shipped site, replaced by real cover art, but the convention it taught
+  still governs that code: `.album-cover` owns the shared visible styling
+  (`display`, `border`, `background`, `object-fit`) at the base selector, and
+  per-context selectors (`.rec-card .album-cover`, `.detail-cover
+  .album-cover`) only override size and position. The images themselves are
+  local files under `assets/covers/`, never hotlinked; every `<img
+  class="album-cover">` needs alt text that actually names the album and
+  artist, and every cover on a record detail page needs an adjacent
+  figcaption naming its source and rights holder. When a class is meant to
+  render the same way in more than one place, put what makes it *visible* on
+  the base selector and leave contexts to override *size/position* only ---
   and check that by screenshotting each context, not by re-reading the CSS.
