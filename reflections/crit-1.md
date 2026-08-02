@@ -1,20 +1,23 @@
 # Crit 1 reflection
 
-**Breakthrough:** I built the whole collection as six genre pages before
-realising that was the wrong shape for the brief. A 2003 personal music page
-wouldn't sort a hand-built shelf by genre --- it would just list what's there,
-in the order it arrived. Rebuilding around one chronological catalogue,
-grouped by decade instead of genre, was the change that made the site feel
-like an actual person's page rather than a mocked-up record shop, and it's
-what let 42 records live on one page without it turning into six shallow ones.
+**Breakthrough:** The project reached 42 record pages and passed its automated
+checks, which initially made it feel complete. Re-reading the brief changed my
+judgement: it asked for a handful of readable pages, not a comprehensive music
+database. The agent had made scale easy, but scale was not the quality the task
+was testing. Cutting the collection to six records was therefore more than a
+content edit. It reframed the site as a small personal archive and gave every
+remaining choice a clearer purpose. The homepage could introduce the collector
+and the collection together, the update log could tell a believable history,
+and the navigation no longer needed artificial genre categories. Removing
+features such as the fake “Now Playing” display followed the same principle:
+the site became stronger when every visible element supported its story.
 
-**What this changed about how I want to build:** the two bugs that mattered
-most --- the duplicate `<h1>` across all 42 detail pages, and the invisible
-cover-placeholder box on mobile --- were both things `pnpm check` and an actual
-screenshot caught that reading the HTML/CSS by eye didn't. I'd written the
-placeholder styling once and assumed reusing the class elsewhere would reuse
-the look; it didn't, because the visible styling was scoped to one context
-only. That's a habit I want to keep: treat a green build as "nothing broke
-mechanically," not "it looks right," and actually render the page at both
-viewports before calling something done, rather than trusting my mental model
-of the CSS.
+**What this changed about who I want to be as a software developer:** I do not
+want to treat an agent's large, technically valid output as evidence that the
+right problem has been solved. The developer still has to interpret the brief,
+set the standard for relevance, and be willing to remove work. I want to use
+automated checks to verify structure, screenshots to test what actually renders,
+and repeated readings of the brief to test whether the whole direction is still
+right. A green build can show that nothing broke mechanically; it cannot decide
+whether the result is coherent, honest, or appropriately scoped. That judgement
+is the part of agentic development I want to take responsibility for.
