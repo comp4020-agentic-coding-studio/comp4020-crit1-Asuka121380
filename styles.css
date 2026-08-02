@@ -12,8 +12,16 @@
   --link: #3ff;
   --link-visited: #c6f;
   --warn: #f44;
-  --lcd-green: #3f5;
+  --font-pixel: "VT323", "Courier New", monospace;
   --sidebar-width: 180px;
+}
+
+@font-face {
+  font-family: "VT323";
+  src: url("./assets/fonts/vt323/VT323-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -36,9 +44,9 @@ body {
     transparent 6px
   );
   color: var(--text);
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  line-height: 1.45;
   overflow-x: hidden;
 }
 
@@ -54,7 +62,14 @@ body {
 /* ---- header (full-bleed banner, constrained inner row) ---- */
 
 .site-header {
-  background: #2b2b2b;
+  background-color: #2b2b2b;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 4%) 0,
+    rgb(255 255 255 / 4%) 1px,
+    transparent 1px,
+    transparent 3px
+  );
   border-bottom: 2px outset #777;
 }
 
@@ -64,24 +79,30 @@ body {
 
 .site-title {
   margin: 0;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 38px;
+  font-family: var(--font-pixel);
+  font-size: 46px;
   letter-spacing: 0.08em;
   color: var(--heading);
   text-shadow: 1px 1px 0 #000;
 }
 
+@media (width <= 639px) {
+  .site-title {
+    font-size: 34px;
+  }
+}
+
 .site-tagline {
   margin: 0.15rem 0 0;
-  font-size: 12px;
+  font-size: 15px;
   color: #ddd;
   font-style: italic;
 }
 
 .site-dates {
   margin: 0.35rem 0 0;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 15px;
   color: #9fd8ff;
 }
 
@@ -131,10 +152,11 @@ body {
 
 .nav-heading {
   margin: 0 0 0.4rem;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 15px;
   color: #9fd8ff;
   letter-spacing: 0.05em;
+  text-shadow: 1px 1px 0 #000;
 }
 
 .nav-records li {
@@ -143,7 +165,7 @@ body {
 }
 
 .site-nav a {
-  font-size: 14px;
+  font-size: 18px;
   text-decoration: none;
   padding: 0.1rem 0.05rem;
 }
@@ -182,16 +204,18 @@ body {
 
 .detail-title {
   color: var(--heading);
-  font-size: 22px;
+  font-size: 27px;
   border-bottom: 1px dotted var(--border-light);
   padding-bottom: 0.3rem;
   margin-top: 0;
+  text-shadow: 1px 1px 0 #000;
 }
 
 .site-main h2 {
   color: var(--heading);
-  font-size: 21px;
+  font-size: 26px;
   margin-top: 1.6rem;
+  text-shadow: 1px 1px 0 #000;
 }
 
 /* ---- links ---- */
@@ -230,27 +254,13 @@ hr {
   margin-bottom: 0.6rem;
 }
 
-.currently-playing {
-  font-family: "Courier New", Courier, monospace;
-  background: #000;
-  color: var(--lcd-green);
-  border: 2px inset #444;
-  padding: 0.5rem 0.7rem;
-  font-size: 12px;
-}
-
-.currently-playing .cp-label {
-  color: #7fff9f;
-  letter-spacing: 0.1em;
-}
-
 .visitor-counter-wrap {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 15px;
 }
 
 .visitor-counter {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--font-pixel);
   display: inline-flex;
   gap: 2px;
   background: #000;
@@ -268,8 +278,8 @@ hr {
 }
 
 .update-log {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
   white-space: pre-wrap;
   background: #000;
   color: #ccc;
@@ -289,7 +299,7 @@ hr {
 table.catalogue {
   border-collapse: collapse;
   width: 100%;
-  font-size: 12px;
+  font-size: 15px;
   min-width: 480px;
 }
 
@@ -299,6 +309,7 @@ table.catalogue caption {
   color: var(--heading);
   padding: 0.3rem 0.4rem;
   background: var(--panel-alt);
+  text-shadow: 1px 1px 0 #000;
 }
 
 table.catalogue th,
@@ -311,6 +322,7 @@ table.catalogue td {
 table.catalogue th {
   background: #22252f;
   color: var(--heading);
+  text-shadow: 1px 1px 0 #000;
 }
 
 table.catalogue tr:nth-child(even) td {
@@ -348,31 +360,23 @@ table.catalogue tr:nth-child(even) td {
   background: var(--panel-alt2);
 }
 
-.cover-placeholder {
-  border: 1px dashed var(--border-light);
+.album-cover {
+  display: block;
+  border: 3px outset #555;
   background: #000;
-  color: #7a8a7a;
-  font-family: "Courier New", Courier, monospace;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.3;
-  padding: 4px;
+  object-fit: cover;
 }
 
-.rec-card .cover-placeholder {
+.rec-card .album-cover {
   flex: 0 0 auto;
   width: 110px;
   height: 110px;
-  font-size: 9px;
 }
 
 @media (width <= 639px) {
-  .rec-card .cover-placeholder {
+  .rec-card .album-cover {
     width: 90px;
     height: 90px;
-    font-size: 8px;
   }
 }
 
@@ -383,25 +387,25 @@ table.catalogue tr:nth-child(even) td {
 
 .rec-artist {
   margin: 0;
-  font-size: 12px;
+  font-size: 15px;
   color: #9fd8ff;
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--font-pixel);
 }
 
 .rec-title {
   margin: 0.15rem 0 0.3rem;
-  font-size: 16px;
+  font-size: 19px;
   color: #fff;
 }
 
 .rec-meta {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--text);
   margin: 0 0 0.35rem;
 }
 
 .rec-link {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bold;
   margin: 0;
 }
@@ -409,8 +413,8 @@ table.catalogue tr:nth-child(even) td {
 /* ---- album detail page ---- */
 
 .detail-heading {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 15px;
   color: #9fd8ff;
   margin: 0 0 0.4rem;
 }
@@ -426,10 +430,26 @@ table.catalogue tr:nth-child(even) td {
   flex: 0 0 auto;
 }
 
-.detail-cover .cover-placeholder {
-  width: 160px;
-  height: 160px;
-  font-size: 10px;
+.detail-cover .album-cover {
+  width: 200px;
+  height: 200px;
+}
+
+.cover-figure {
+  margin: 0;
+}
+
+.cover-credit {
+  margin: 0.35rem 0 0;
+  max-width: 200px;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  line-height: 1.3;
+  color: #7a8a99;
+}
+
+.cover-credit a {
+  color: inherit;
 }
 
 .detail-facts {
@@ -453,7 +473,7 @@ table.catalogue tr:nth-child(even) td {
   background: var(--panel-alt);
   padding: 0.5rem 0.7rem;
   margin: 1.2rem 0 0.5rem;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .record-nav .rn-prev,
@@ -476,8 +496,8 @@ table.catalogue tr:nth-child(even) td {
   border-top: 2px outset #555;
   background: var(--panel-alt);
   padding: 0.75rem 1rem;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+  font-family: var(--font-pixel);
+  font-size: 15px;
   text-align: center;
   color: #9a9a9a;
 }
